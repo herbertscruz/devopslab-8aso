@@ -47,7 +47,7 @@ jobs:
       - name: Docker Login
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
-          ARTIFACT_REGISTRY:  ${{ secrets.ARTIFACT_REGISTRY}}
+          ARTIFACT_REGISTRY:  ${{ secrets.ARTIFACT_REGISTRY }}
         run: | 
           echo '${{ secrets.GOOGLE_CREDENTIALS }}' > key.json
           cat key.json | docker login -u _json_key --password-stdin ${{ secrets.ARTIFACT_REGISTRY }}
@@ -88,7 +88,7 @@ jobs:
           ARTIFACT_REGISTRY_REPO: ${{ secrets.ARTIFACT_REGISTRY_REPO }}
         uses: 'google-github-actions/deploy-appengine@v0'
         with:
-          image_url: ${{ ARTIFACT_REGISTRY_REPO }}/myapp:latest
+          image_url: ${{ secrets.ARTIFACT_REGISTRY_REPO }}/myapp:latest
 
       - name: Prod Test
         run: 'curl "${{ steps.appengine.outputs.url }}"'
